@@ -75,7 +75,7 @@ architecture Behavioral of datapath is
 	COMPONENT concat
 	PORT(
 		instruction_in : IN std_logic_vector(25 downto 0);
-		pc_in : IN std_logic_vector(5 downto 0);          
+		pc_in : IN std_logic_vector(3 downto 0);          
 		concat_out : OUT std_logic_vector(31 downto 0)
 		);
 	END COMPONENT;
@@ -202,7 +202,7 @@ begin
 	-- Adder adding 1 to PC
 	add1 : add port map(add_in1, pc_out, branch_mux_in0);
 	-- Concatenation of PC and immediate in case of jump
-	concatenaton : concat port map(address, branch_mux_in0(31 downto 26), jump_mux_in1);
+	concatenaton : concat port map(address, branch_mux_in0(31 downto 28), jump_mux_in1);
 	-- Adder adding offset in case of branch
 	add2 : add port map(branch_mux_in0, signed_output_1, branch_mux_in1);
 	-- Sign extender

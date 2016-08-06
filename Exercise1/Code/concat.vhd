@@ -32,12 +32,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity concat is
 	generic (
 				instruction_width : positive := 26;
-				pc_width : positive := 6
+				pc_width : positive := 4;
+				zero_addition : positive := 2
 				);
 	port (
 			instruction_in : in std_logic_vector(instruction_width - 1 downto 0);
 			pc_in				: in std_logic_vector(pc_width - 1 downto 0);
-			concat_out		: out std_logic_vector((instruction_width + pc_width - 1) downto 0)
+			concat_out		: out std_logic_vector((instruction_width + pc_width + zero_addition- 1) downto 0)
 			);
 
 end concat;
@@ -46,7 +47,7 @@ architecture Behavioral of concat is
 
 begin
 	-- pure concatenation
-	concat_out <= pc_in & instruction_in;
+	concat_out <= pc_in & instruction_in & "00";
 
 end Behavioral;
 
